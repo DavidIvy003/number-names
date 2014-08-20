@@ -34,7 +34,7 @@ describe NumberNames do
     NumberNames.new('9').name.must_equal 'nine'
   end
 
-  it "can say double digit numbers" do
+  it "can say numbers less than 21" do
     NumberNames.new('10').name.must_equal 'ten'
     NumberNames.new('11').name.must_equal 'eleven'
     NumberNames.new('12').name.must_equal 'twelve'
@@ -46,5 +46,19 @@ describe NumberNames do
     NumberNames.new('18').name.must_equal 'eighteen'
     NumberNames.new('19').name.must_equal 'nineteen'
     NumberNames.new('20').name.must_equal 'twenty'
+  end
+
+  it "can say numbers less than 100" do
+    NumberNames.new('24').name.must_equal 'twenty-four'
+    NumberNames.new('30').name.must_equal 'thirty'
+    NumberNames.new('33').name.must_equal 'thirty-three'
+    NumberNames.new('42').name.must_equal 'forty-two'
+    NumberNames.new('57').name.must_equal 'fifty-seven'
+    NumberNames.new('61').name.must_equal 'sixty-one'
+    NumberNames.new('75').name.must_equal 'seventy-five'
+    NumberNames.new('88').name.must_equal 'eighty-eight'
+    NumberNames.new('99').name.must_equal 'ninety-nine'
+    NumberNames.new('96').name.must_equal 'ninety-six'
+
   end
 end

@@ -26,8 +26,14 @@ class NumberNames
                   18 => 'eighteen',
                   19 => 'nineteen',
                   20 => 'twenty',
-
-                    }
+                  30 => 'thirty',
+                  40 => 'forty',
+                  50 => 'fifty',
+                  60 => 'sixty',
+                  70 => 'seventy',
+                  80 => 'eighty',
+                  90 => 'ninety'
+                }
 
   def initialize(number)
     begin
@@ -38,8 +44,21 @@ class NumberNames
   end
 
   def name
-    NUMBER_NAMES[@number]
+    if NUMBER_NAMES.include? number
+      NUMBER_NAMES[number]
+    else
+      "#{NUMBER_NAMES[tens_digit * 10]}-#{NUMBER_NAMES[ones_digit]}"
+    end
   end
+
+  private
+    def tens_digit
+      number / 10
+    end
+
+    def ones_digit
+      number % 10
+    end
 end
 
 class InvalidInput < Exception; end
