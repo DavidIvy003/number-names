@@ -32,7 +32,8 @@ class NumberNames
                   60 => 'sixty',
                   70 => 'seventy',
                   80 => 'eighty',
-                  90 => 'ninety'
+                  90 => 'ninety',
+
                 }
 
   def initialize(number)
@@ -44,16 +45,35 @@ class NumberNames
   end
 
   def name
-    if NUMBER_NAMES.include? number
-      NUMBER_NAMES[number]
+    if hundreds?
+      "#{NUMBER_NAMES[hundreds_digit]} hundred #{tens_name}".strip
     else
-      "#{NUMBER_NAMES[tens_digit * 10]}-#{NUMBER_NAMES[ones_digit]}"
+      tens_name
     end
   end
 
   private
+
+    def tens_name
+      if NUMBER_NAMES.include? number
+        NUMBER_NAMES[number]
+      elsif tens_digit == 0
+        ""
+      else
+        "#{NUMBER_NAMES[tens_digit * 10]}-#{NUMBER_NAMES[ones_digit]}"
+      end
+    end
+
+    def hundreds?
+      hundreds_digit >= 1
+    end
+
+    def hundreds_digit
+      (number / 100) % 10
+    end
+
     def tens_digit
-      number / 10
+      (number / 10) % 10
     end
 
     def ones_digit

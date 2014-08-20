@@ -59,6 +59,17 @@ describe NumberNames do
     NumberNames.new('88').name.must_equal 'eighty-eight'
     NumberNames.new('99').name.must_equal 'ninety-nine'
     NumberNames.new('96').name.must_equal 'ninety-six'
+  end
 
+  it "can say numbers round hundreds" do
+    NumberNames.new('100').name.must_equal 'one hundred'
+    NumberNames.new('200').name.must_equal 'two hundred'
+    NumberNames.new('300').name.must_equal 'three hundred'
+    NumberNames.new('400').name.must_equal 'four hundred'
+    NumberNames.new('500').name.must_equal 'five hundred'
+    NumberNames.new('600').name.must_equal 'six hundred'
+    NumberNames.new('700').name.must_equal 'seven hundred'
+    NumberNames.new('800').name.must_equal 'eight hundred'
+    NumberNames.new('900').name.must_equal 'nine hundred'
   end
 end
