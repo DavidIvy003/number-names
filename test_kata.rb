@@ -33,4 +33,18 @@ describe NumberNames do
     NumberNames.new('8').name.must_equal 'eight'
     NumberNames.new('9').name.must_equal 'nine'
   end
+
+  it "can say double digit numbers" do
+    NumberNames.new('10').name.must_equal 'ten'
+    NumberNames.new('11').name.must_equal 'eleven'
+    NumberNames.new('12').name.must_equal 'twelve'
+    NumberNames.new('13').name.must_equal 'thirteen'
+    NumberNames.new('14').name.must_equal 'fourteen'
+    NumberNames.new('15').name.must_equal 'fifteen'
+    NumberNames.new('16').name.must_equal 'sixteen'
+    NumberNames.new('17').name.must_equal 'seventeen'
+    NumberNames.new('18').name.must_equal 'eighteen'
+    NumberNames.new('19').name.must_equal 'nineteen'
+    NumberNames.new('20').name.must_equal 'twenty'
+  end
 end
