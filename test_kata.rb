@@ -79,4 +79,16 @@ describe NumberNames do
     NumberNames.new('237').name.must_equal 'two hundred and thirty-seven'
     NumberNames.new('999').name.must_equal 'nine hundred and ninety-nine'
   end
+
+  it "can say numbers round thousands" do
+    NumberNames.new('1000').name.must_equal 'one thousand'
+    NumberNames.new('2000').name.must_equal 'two thousand'
+    NumberNames.new('3000').name.must_equal 'three thousand'
+    NumberNames.new('4000').name.must_equal 'four thousand'
+    NumberNames.new('5000').name.must_equal 'five thousand'
+    NumberNames.new('6000').name.must_equal 'six thousand'
+    NumberNames.new('7000').name.must_equal 'seven thousand'
+    NumberNames.new('8000').name.must_equal 'eight thousand'
+    NumberNames.new('9000').name.must_equal 'nine thousand'
+  end
 end
