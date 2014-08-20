@@ -72,4 +72,11 @@ describe NumberNames do
     NumberNames.new('800').name.must_equal 'eight hundred'
     NumberNames.new('900').name.must_equal 'nine hundred'
   end
+
+  it "can say any three-digit number" do
+    NumberNames.new('107').name.must_equal 'one hundred and seven'
+    NumberNames.new('111').name.must_equal 'one hundred and eleven'
+    NumberNames.new('237').name.must_equal 'two hundred and thirty-seven'
+    NumberNames.new('999').name.must_equal 'nine hundred and ninety-nine'
+  end
 end

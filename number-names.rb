@@ -46,19 +46,26 @@ class NumberNames
 
   def name
     if hundreds?
-      "#{NUMBER_NAMES[hundreds_digit]} hundred #{tens_name}".strip
+      two_digit_num = number % 100
+      tens_name_str = tens_name(two_digit_num)
+
+      # Commented out b/c the compiler is loco
+      # tens_name_str.prepend("and ") unless tens_name_str.empty?
+
+      tens_name_str = "and #{tens_name_str}" unless tens_name_str.empty?
+      "#{NUMBER_NAMES[hundreds_digit]} hundred #{tens_name_str}".strip
     else
-      tens_name
+      tens_name(number)
     end
   end
 
   private
 
-    def tens_name
-      if NUMBER_NAMES.include? number
-        NUMBER_NAMES[number]
-      elsif tens_digit == 0
-        ""
+    def tens_name two_digit_num
+      if hundreds? and tens_digit == 0 and ones_digit == 0
+        ''
+      elsif NUMBER_NAMES.include? two_digit_num
+        NUMBER_NAMES[two_digit_num]
       else
         "#{NUMBER_NAMES[tens_digit * 10]}-#{NUMBER_NAMES[ones_digit]}"
       end
