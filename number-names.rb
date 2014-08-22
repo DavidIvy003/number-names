@@ -65,18 +65,24 @@ class NumberNames
 
         tens_name_str = "and #{tens_name_str}" unless tens_name_str.empty?
         "#{NUMBER_NAMES[hundreds_digit(number)]} hundred #{tens_name_str}".strip
-      else
+      elsif tens?(number)
         tens_name(number)
+      else
+        ones_name(number)
       end
     end
 
+    def ones_name(number)
+      "#{NUMBER_NAMES[number]}"
+    end
+
     def tens_name two_digit_num
-      if hundreds? and tens_digit == 0 and ones_digit == 0
+      if two_digit_num == 0
         ''
       elsif NUMBER_NAMES.include? two_digit_num
         NUMBER_NAMES[two_digit_num]
       else
-        "#{NUMBER_NAMES[tens_digit * 10]}-#{NUMBER_NAMES[ones_digit]}"
+        "#{NUMBER_NAMES[tens_digit(two_digit_num) * 10]}-#{NUMBER_NAMES[ones_digit(two_digit_num)]}"
       end
     end
 
@@ -94,6 +100,10 @@ class NumberNames
 
     def hundreds_digit number=@number
       (number / 100) % 10
+    end
+
+    def tens? number=@number
+      tens_digit(number) >= 1
     end
 
     def tens_digit number=@number
