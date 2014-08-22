@@ -46,7 +46,7 @@ class NumberNames
   def name number=@number
     if thousands?(number)
       three_digit_num = number % 1000
-      hundreds_name_str = hundreds_name(three_digit_num)
+      hundreds_name_str = name(three_digit_num)
       hundreds_name_str = "and #{hundreds_name_str}" if three_digit_num < 10
       hundreds_name_str = '' if three_digit_num  == 0
 
@@ -64,7 +64,7 @@ class NumberNames
         tens_name_str = tens_name(two_digit_num)
 
         tens_name_str = "and #{tens_name_str}" unless tens_name_str.empty?
-        "#{NUMBER_NAMES[hundreds_digit]} hundred #{tens_name_str}".strip
+        "#{NUMBER_NAMES[hundreds_digit(number)]} hundred #{tens_name_str}".strip
       else
         tens_name(number)
       end
