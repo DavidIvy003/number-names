@@ -53,7 +53,7 @@ class NumberNames
     first_digits_name  = hundreds_name first_digits
     current_place_name = place_name(number)
 
-    next_number = number.to_s.slice(first_digits.to_s.length..-1).to_i
+    next_number = digits_after(number, first_digits.to_s.length)
     next_name = ''
     next_name = name(next_number)  if next_number > 0
     next_name = "and #{next_name}" if next_number < 10 and !next_name.empty?
@@ -64,13 +64,21 @@ class NumberNames
   private
 
     def front_digits number
+      # Returns digits at front of number that are rounded up to three
+      # Example front_digits(12334563) returns 12
       while(thousands? number)
         number = number / 1000
       end
       number
     end
 
+    def digits_after number, n_digits
+      # Returns digits from number after the first n digits
+      number.to_s.slice(n_digits..-1).to_i
+    end
+
     def place_name number
+      # Returns name of current digit place: 'thousand', 'million', ex
       current_place = ''
       PLACE_NAMES.each do |idx, val|
         current_place = val if number >= idx
