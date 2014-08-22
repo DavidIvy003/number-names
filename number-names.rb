@@ -5,12 +5,6 @@ require 'colorize'
 class NumberNames
   attr_accessor :number
 
-  NUMBER_PLACES = { 1 => :ones,
-                    2 => :tens,
-                    3 => :hundreds,
-                    4 => :thousands
-                  }
-
   NUMBER_NAMES = { 0 => 'zero',
                    1 => 'one',
                    2 => 'two',
