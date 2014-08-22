@@ -104,4 +104,12 @@ describe NumberNames do
     NumberNames.new('8815').name.must_equal 'eight thousand eight hundred and fifteen'
     NumberNames.new('9999').name.must_equal 'nine thousand nine hundred and ninety-nine'
   end
+
+  it "can say any six-digit number" do
+    NumberNames.new('111111').name.must_equal 'one hundred and eleven thousand one hundred and eleven'
+    NumberNames.new('123456').name.must_equal 'one hundred and twenty-three thousand four hundred and fifty-six'
+    NumberNames.new('246810').name.must_equal 'two hundred and forty-six thousand eight hundred and ten'
+    NumberNames.new('96430').name.must_equal 'ninety-six thousand four hundred and thirty'
+    NumberNames.new('36000').name.must_equal 'thirty-siz thousand'
+  end
 end
