@@ -5,6 +5,12 @@ require 'colorize'
 class NumberNames
   attr_accessor :number
 
+  NUMBER_PLACES = { 1 => :ones,
+                    2 => :tens,
+                    3 => :hundreds,
+                    4 => :thousands
+                  }
+
   NUMBER_NAMES = { 0 => 'zero',
                    1 => 'one',
                    2 => 'two',
@@ -33,7 +39,6 @@ class NumberNames
                   70 => 'seventy',
                   80 => 'eighty',
                   90 => 'ninety',
-
                 }
 
   def initialize(number)
@@ -44,13 +49,12 @@ class NumberNames
     end
   end
 
-  def name
-    if hundreds?
+  def name number=@number
+    if thousands?(number)
+      (name(thousands_digits(number)) + " thousand ").strip
+    elsif hundreds?(number)
       two_digit_num = number % 100
       tens_name_str = tens_name(two_digit_num)
-
-      # Commented out b/c the compiler is loco
-      # tens_name_str.prepend("and ") unless tens_name_str.empty?
 
       tens_name_str = "and #{tens_name_str}" unless tens_name_str.empty?
       "#{NUMBER_NAMES[hundreds_digit]} hundred #{tens_name_str}".strip
@@ -71,19 +75,27 @@ class NumberNames
       end
     end
 
-    def hundreds?
-      hundreds_digit >= 1
+    def thousands? number=@number
+      thousands_digits(number) >= 1
     end
 
-    def hundreds_digit
+    def thousands_digits number=@number
+      number / 1000
+    end
+
+    def hundreds? number=@number
+      hundreds_digit(number) >= 1
+    end
+
+    def hundreds_digit number=@number
       (number / 100) % 10
     end
 
-    def tens_digit
+    def tens_digit number=@number
       (number / 10) % 10
     end
 
-    def ones_digit
+    def ones_digit number=@number
       number % 10
     end
 end
