@@ -110,6 +110,6 @@ describe NumberNames do
     NumberNames.new('123456').name.must_equal 'one hundred and twenty-three thousand four hundred and fifty-six'
     NumberNames.new('246810').name.must_equal 'two hundred and forty-six thousand eight hundred and ten'
     NumberNames.new('96430').name.must_equal 'ninety-six thousand four hundred and thirty'
-    NumberNames.new('36000').name.must_equal 'thirty-siz thousand'
+    NumberNames.new('36000').name.must_equal 'thirty-six thousand'
   end
 end
