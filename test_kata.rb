@@ -112,4 +112,16 @@ describe NumberNames do
     NumberNames.new('96430').name.must_equal 'ninety-six thousand four hundred and thirty'
     NumberNames.new('36000').name.must_equal 'thirty-six thousand'
   end
+
+  it "can say numbers round millions" do
+    NumberNames.new('1000000').name.must_equal 'one million'
+    NumberNames.new('2000000').name.must_equal 'two million'
+    NumberNames.new('3000000').name.must_equal 'three million'
+    NumberNames.new('4000000').name.must_equal 'four million'
+    NumberNames.new('5000000').name.must_equal 'five million'
+    NumberNames.new('6000000').name.must_equal 'six million'
+    NumberNames.new('7000000').name.must_equal 'seven million'
+    NumberNames.new('8000000').name.must_equal 'eight million'
+    NumberNames.new('9000000').name.must_equal 'nine million'
+  end
 end
