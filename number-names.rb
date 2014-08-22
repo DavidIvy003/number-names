@@ -46,23 +46,29 @@ class NumberNames
   def name number=@number
     if thousands?(number)
       three_digit_num = number % 1000
-      hundreds_name_str = name(three_digit_num)
+      hundreds_name_str = hundreds_name(three_digit_num)
       hundreds_name_str = "and #{hundreds_name_str}" if three_digit_num < 10
       hundreds_name_str = '' if three_digit_num  == 0
 
       (name(thousands_digits(number)) + " thousand #{hundreds_name_str}").strip
-    elsif hundreds?(number)
-      two_digit_num = number % 100
-      tens_name_str = tens_name(two_digit_num)
-
-      tens_name_str = "and #{tens_name_str}" unless tens_name_str.empty?
-      "#{NUMBER_NAMES[hundreds_digit]} hundred #{tens_name_str}".strip
     else
-      tens_name(number)
+      hundreds_name number
     end
   end
 
   private
+
+    def hundreds_name number
+      if hundreds?(number)
+        two_digit_num = number % 100
+        tens_name_str = tens_name(two_digit_num)
+
+        tens_name_str = "and #{tens_name_str}" unless tens_name_str.empty?
+        "#{NUMBER_NAMES[hundreds_digit]} hundred #{tens_name_str}".strip
+      else
+        tens_name(number)
+      end
+    end
 
     def tens_name two_digit_num
       if hundreds? and tens_digit == 0 and ones_digit == 0
