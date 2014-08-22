@@ -35,6 +35,11 @@ class NumberNames
                   90 => 'ninety',
                 }
 
+  PLACE_NAMES = {
+    1000 => 'thousand',
+    1000000 => 'million'
+  }
+
   def initialize(number)
     begin
       @number = Integer(number)
@@ -44,19 +49,34 @@ class NumberNames
   end
 
   def name number=@number
-    if thousands?(number)
-      three_digit_num = number % 1000
-      hundreds_name_str = name(three_digit_num)
-      hundreds_name_str = "and #{hundreds_name_str}" if three_digit_num < 10
-      hundreds_name_str = '' if three_digit_num  == 0
+    first_digits       = front_digits number
+    first_digits_name  = hundreds_name first_digits
+    current_place_name = place_name(number)
 
-      (name(thousands_digits(number)) + " thousand #{hundreds_name_str}").strip
-    else
-      hundreds_name number
-    end
+    next_number = number.to_s.slice(first_digits.to_s.length..-1).to_i
+    next_name = ''
+    next_name = name(next_number)  if next_number > 0
+    next_name = "and #{next_name}" if next_number < 10 and !next_name.empty?
+
+    "#{first_digits_name} #{current_place_name} #{next_name}".strip
   end
 
   private
+
+    def front_digits number
+      while(thousands? number)
+        number = number / 1000
+      end
+      number
+    end
+
+    def place_name number
+      current_place = ''
+      PLACE_NAMES.each do |idx, val|
+        current_place = val if number >= idx
+      end
+      current_place
+    end
 
     def hundreds_name number
       if hundreds?(number)
