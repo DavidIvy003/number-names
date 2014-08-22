@@ -91,4 +91,17 @@ describe NumberNames do
     NumberNames.new('8000').name.must_equal 'eight thousand'
     NumberNames.new('9000').name.must_equal 'nine thousand'
   end
+
+  it "can say any four-digit number" do
+    NumberNames.new('1111').name.must_equal 'one thousand one hundred and eleven'
+    NumberNames.new('1234').name.must_equal 'one thousand two hundred and thirty-four'
+    NumberNames.new('2468').name.must_equal 'two thousand four hundred and sixty-eight'
+    NumberNames.new('3690').name.must_equal 'three thousand six hundred and ninety'
+    NumberNames.new('4001').name.must_equal 'four thousand and one'
+    NumberNames.new('5999').name.must_equal 'five thousand nine hundred and ninety-nine'
+    NumberNames.new('6543').name.must_equal 'six thousand five hundred and forty-three'
+    NumberNames.new('7892').name.must_equal 'seven thousand eight hundred and ninety-two'
+    NumberNames.new('8815').name.must_equal 'eight thousand eight hundred and fifteen'
+    NumberNames.new('9999').name.must_equal 'nine thousand nine hundred and ninety-nine'
+  end
 end
