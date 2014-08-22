@@ -124,4 +124,11 @@ describe NumberNames do
     NumberNames.new('8000000').name.must_equal 'eight million'
     NumberNames.new('9000000').name.must_equal 'nine million'
   end
+
+  it "can say numbers any nine-digit number" do
+    NumberNames.new('111000000').name.must_equal 'one hundred and eleven million'
+    NumberNames.new('425000001').name.must_equal 'four hundred and twenty-five million and one'
+    NumberNames.new('49001001').name.must_equal 'forty-nine million one thousand and one'
+    NumberNames.new('67045000').name.must_equal 'sixty-seven million forty-five thousand'
+  end
 end

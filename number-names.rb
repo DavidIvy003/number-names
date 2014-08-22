@@ -35,6 +35,11 @@ class NumberNames
                   90 => 'ninety',
                 }
 
+  PLACE_NAMES = {
+    1000 => 'thousand',
+    1000000 => 'million'
+  }
+
   def initialize(number)
     begin
       @number = Integer(number)
@@ -45,18 +50,39 @@ class NumberNames
 
   def name number=@number
     if thousands?(number)
+      first_digits      = front_digits(number)
+      first_digits_name = hundreds_name(first_digits)
+      current_place_name = place_name(number)
+
       three_digit_num = number % 1000
       hundreds_name_str = name(three_digit_num)
       hundreds_name_str = "and #{hundreds_name_str}" if three_digit_num < 10
       hundreds_name_str = '' if three_digit_num  == 0
 
-      (name(thousands_digits(number)) + " thousand #{hundreds_name_str}").strip
+      "#{first_digits_name} #{current_place_name} #{hundreds_name_str}".strip
     else
       hundreds_name number
     end
   end
 
   private
+    def front_digits number
+      # Returns digits at front of number that are rounded up to three
+      # Example front_digits(12334563) returns 12
+      while(thousands? number)
+        number = number / 1000
+      end
+      number
+    end
+
+    def place_name number
+      # Returns name of current digit place: 'thousand', 'million', ex
+      current_place = ''
+      PLACE_NAMES.each do |idx, val|
+        current_place = val if number >= idx
+      end
+      current_place
+    end
 
     def hundreds_name number
       if hundreds?(number)
