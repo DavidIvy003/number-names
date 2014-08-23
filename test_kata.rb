@@ -131,6 +131,17 @@ describe NumberNames do
     NumberNames.new('49001001').name.must_equal 'forty-nine million one thousand and one'
     NumberNames.new('67045000').name.must_equal 'sixty-seven million forty-five thousand'
     NumberNames.new('367145999').name.must_equal 'three hundred and sixty-seven million one hundred and forty-five thousand nine hundred and ninety-nine'
+  end
 
+  it "can say ten-digit numbers" do
+    NumberNames.new('1000000000').name.must_equal 'one billion'
+    NumberNames.new('2000000000').name.must_equal 'two billion'
+    NumberNames.new('3000000000').name.must_equal 'three billion'
+    NumberNames.new('4000000000').name.must_equal 'four billion'
+    NumberNames.new('5000000000').name.must_equal 'five billion'
+    NumberNames.new('6000000000').name.must_equal 'six billion'
+    NumberNames.new('7000000000').name.must_equal 'seven billion'
+    NumberNames.new('8000000000').name.must_equal 'eight billion'
+    NumberNames.new('9999999999').name.must_equal 'nine billion nine hundred and ninety-nine million nine hundred and ninety-nine thousand nine hundred and ninety-nine'
   end
 end
