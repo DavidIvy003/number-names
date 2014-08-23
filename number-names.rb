@@ -49,19 +49,21 @@ class NumberNames
   end
 
   def name number=@number
-    if thousands?(number)
+    if number >= 1000
       first_digits      = front_digits(number)
       first_digits_name = hundreds_name(first_digits)
       current_place_name = place_name(number)
+      current_place_value = place_value(number)
 
-      three_digit_num = number % 1000
-      hundreds_name_str = name(three_digit_num)
-      hundreds_name_str = "and #{hundreds_name_str}" if three_digit_num < 10
-      hundreds_name_str = '' if three_digit_num  == 0
-
-      "#{first_digits_name} #{current_place_name} #{hundreds_name_str}".strip
+      # subtract most significant digits and recurse
+      number -= first_digits * current_place_value
+      "#{first_digits_name} #{current_place_name} #{name(number)}".strip
     else
-      hundreds_name number
+      case
+      when number == 0 && @number > 10 then ''
+      when number < 10 && @number > 10 then "and #{hundreds_name(number)}"
+      else hundreds_name(number)
+      end
     end
   end
 
@@ -82,6 +84,15 @@ class NumberNames
         current_place = val if number >= idx
       end
       current_place
+    end
+
+    def place_value number
+      # Returns value of current digit place: 1000, 1000000, etc
+      current_value = 0
+      PLACE_NAMES.each do |idx, val|
+        current_value = idx if number >= idx
+      end
+      current_value
     end
 
     def hundreds_name number
