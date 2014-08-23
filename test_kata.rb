@@ -130,5 +130,7 @@ describe NumberNames do
     NumberNames.new('425000001').name.must_equal 'four hundred and twenty-five million and one'
     NumberNames.new('49001001').name.must_equal 'forty-nine million one thousand and one'
     NumberNames.new('67045000').name.must_equal 'sixty-seven million forty-five thousand'
+    NumberNames.new('367145999').name.must_equal 'three hundred and sixty-seven million one hundred and forty-five thousand nine hundred and ninety-nine'
+
   end
 end
