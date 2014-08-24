@@ -37,7 +37,16 @@ class NumberNames
 
   PLACE_NAMES = {
     1000 => 'thousand',
-    1000000 => 'million'
+    1000000 => 'million',
+    1000000000 => 'billion',
+    1000000000000 => 'trillion',
+    1000000000000000 => 'quadrillion',
+    1000000000000000000 => 'quintillion',
+    1000000000000000000000 => 'sextillion',
+    1000000000000000000000000 => 'septillion',
+    1000000000000000000000000000 => 'octillion',
+    1000000000000000000000000000000 => 'nonillion',
+    1000000000000000000000000000000000 => 'decillion'
   }
 
   def initialize(number)
@@ -62,7 +71,6 @@ class NumberNames
   end
 
   private
-
     def front_digits number
       # Returns digits at front of number that are rounded up to three
       # Example front_digits(12334563) returns 12
@@ -147,5 +155,5 @@ class InvalidInput < Exception; end
 
 if __FILE__ == $0
   # this will only run if the script was the main, not load'd or require'd
-  puts NumberNames.new
+  puts NumberNames.new( ARGV[0] ).name
 end
